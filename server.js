@@ -33,8 +33,8 @@ var articles = {
         
     },
     articleTwo:{
-                title: 'Article One by GB',
-                heading: 'Article One',
+                title: 'Article Two by GB',
+                heading: 'Article Two',
                 date: 'August 12 2017',
                 content: `<p>
                             My first article .My first article My first article My first article My first article My first article 
@@ -59,8 +59,8 @@ var articles = {
         
     },
     articleThree:{
-                title: 'Article One by GB',
-                heading: 'Article One',
+                title: 'Article Three by GB',
+                heading: 'Article Three',
                 date: 'August 12 2017',
                 content: `<p>
                             My first article .My first article My first article My first article My first article My first article 
