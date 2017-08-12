@@ -5,11 +5,12 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
-    title: 'Article One by GB',
-    heading: 'Article One',
-    date: 'August 12 2017',
-    content: `<p>
+var articles = {
+    articleOne:{
+                title: 'Article One by GB',
+                heading: 'Article One',
+                date: 'August 12 2017',
+                content: `<p>
                             My first article .My first article My first article My first article My first article My first article 
                             My first article My first article My first article My first article My first article My first article 
                             My first article My first article My first article My first article My first article My first article My first article 
@@ -29,6 +30,60 @@ var articleOne = {
                             My first article My first article My first article My first article My first article My first article 
                             My first article My first article My first article My first article My first article My first article My first article 
                         </p>`
+        
+    },
+    articleTwo:{
+                title: 'Article One by GB',
+                heading: 'Article One',
+                date: 'August 12 2017',
+                content: `<p>
+                            My first article .My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article My first article 
+                        </p>
+                        <p>
+                            My first article .My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article My first article 
+                        </p>
+                        <p>
+                            My first article .My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article My first article 
+                        </p>
+                        <p>
+                            My first article .My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article My first article 
+                        </p>`
+        
+    },
+    articleThree:{
+                title: 'Article One by GB',
+                heading: 'Article One',
+                date: 'August 12 2017',
+                content: `<p>
+                            My first article .My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article My first article 
+                        </p>
+                        <p>
+                            My first article .My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article My first article 
+                        </p>
+                        <p>
+                            My first article .My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article My first article 
+                        </p>
+                        <p>
+                            My first article .My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article 
+                            My first article My first article My first article My first article My first article My first article My first article 
+                        </p>`
+        
+    },
 };
 
 function createTemplate(data){
@@ -76,19 +131,19 @@ return htmlTemplate;
 }
 
 app.get('/', function (req, res) {
-  res.send(createTemplate(data));
+  res.sendFile(path.join(__dirname,'ui','index.html'));
 });
 
 app.get('/article-one', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+  res.send(createTemplate(articles.articleOne));
 });
 
 app.get('/article-two', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
+   res.send(createTemplate(articles.articleTwo));
 });
 
 app.get('/article-three', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
+   res.send(createTemplate(articles.articleThree));
 });
 
 app.get('/ui/style.css', function (req, res) {
