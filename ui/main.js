@@ -25,11 +25,11 @@ button.onclick = function(){
 };
 
 
-var rawInput = document.getElementById('name');
-var name = rawInput.value;
+
 var submit = document.getElementById('submit_btn');
 submit.onclick = function(){
-    
+    var rawInput = document.getElementById('name');
+    var name = rawInput.value;
     var request = new XMLHttpRequest();
     
     request.onreadystatechange =  function(){
