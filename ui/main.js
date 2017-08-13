@@ -49,7 +49,7 @@ submit.onclick = function(){
     }
     var rawInput = document.getElementById('name');
     var name = rawInput.value;
-    request.open('GET','http://gauravtcs15.imad.hasura-app.io/submit-name'+name,true);
+    request.open('GET','http://gauravtcs15.imad.hasura-app.io/submit-name?name='+name,true);
     request.send(null);
     
 };
