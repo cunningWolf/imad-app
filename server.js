@@ -172,7 +172,6 @@ app.get('/test-db',function(req,res){
     })
 });
 
-
 app.get('/articles/:articleName', function (req, res) {
     
     
