@@ -130,6 +130,18 @@ function createTemplate(data){
 return htmlTemplate;
 }
 
+var Pool =  require('pg').Pool;
+
+var config = {
+    user : 'gauravtcs15',
+    database: 'gauravtcs15',
+    host: 'db.imad.hasura-app.io',
+    port: '5432',
+    password: process.env.DB_PASSWORD
+};
+
+var pool = new Pool(config);
+
 var counter = 0;
 
 app.get('/counter', function (req, res) {
@@ -148,6 +160,18 @@ app.get('/submit-name',function(req,res){
     res.send(JSON.stringify(names));
     
 });
+
+app.get('/test-db',function(req,res){
+    pool.query('Select * from test',function(err,result){
+        if(err){
+            res.status(500).send(err.toString());
+        }
+        else{
+            res.send(JSON.stringify(result));
+        }
+    })
+});
+
 app.get('/:articleName', function (req, res) {
     var articleName = req.params.articleName;
   res.send(createTemplate(articles[articleName]));
