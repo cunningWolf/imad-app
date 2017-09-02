@@ -1,6 +1,7 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var crypto = require('crypto');
 
 var app = express();
 app.use(morgan('combined'));
@@ -172,9 +173,17 @@ app.get('/test-db',function(req,res){
     })
 });
 
+
+app.get('/hah/input',function(req,res){
+    var hashed = hash(req.params.input,'saltissalty');
+   res.send(hashed.toString('hex'));
+});
+
+function hash (input,salt){
+   return crypto.pbkdf2Sync(input,salt,10000,512,'sha512');
+}
+
 app.get('/articles/:articleName', function (req,res) {
-    
-    
     
     pool.query("select * from article where title = $1",[req.params.articleName],function(err,result){
        if(err){
