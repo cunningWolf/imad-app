@@ -173,14 +173,28 @@ app.get('/test-db',function(req,res){
     })
 });
 
+app.get('/create-user',function(req,res){
+   
+   var salt = crypto.getRandomBytes(128).toString('hex');
+   var dbString = hash(pasword,salt);
+   pool.query('insert into "user"(username,password) values ($1,$2)',[username,dbString],function(req,res){
+       if(err){
+           res.status(500).send(err.toString());
+       } 
+       else{
+           res.send('user created'+username);
+       } 
+   });
+});
+
 
 app.get('/hash/:input',function(req,res){
     var hashed = hash(req.params.input,'saltissalty');
-   res.send(hashed.toString('hex'));
+   res.send(hashed);
 });
 
 function hash (input,salt){
-   return crypto.pbkdf2Sync(input,salt,10000,512,'sha512');
+   return crypto.pbkdf2Sync(input,salt,10000,512,'sha512').toString('hex');
 }
 
 app.get('/articles/:articleName', function (req,res) {
