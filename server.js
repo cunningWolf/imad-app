@@ -2,9 +2,11 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var crypto = require('crypto');
+var bodyParser = require('body-parser');
 
 var app = express();
 app.use(morgan('combined'));
+app.use(bodyParser.json());
 
 var articles = {
     'article-one':{
@@ -173,8 +175,11 @@ app.get('/test-db',function(req,res){
     })
 });
 
-app.get('/create-user',function(req,res){
+app.post('/create-user',function(req,res){
    
+   
+   var username = req.body.username;
+   var password = req.body.password;
    var salt = crypto.getRandomBytes(128).toString('hex');
    var dbString = hash(pasword,salt);
    pool.query('insert into "user"(username,password) values ($1,$2)',[username,dbString],function(req,res){
