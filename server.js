@@ -174,7 +174,7 @@ app.get('/test-db',function(req,res){
 });
 
 
-app.get('/hah/input',function(req,res){
+app.get('/hash/input',function(req,res){
     var hashed = hash(req.params.input,'saltissalty');
    res.send(hashed.toString('hex'));
 });
