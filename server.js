@@ -199,7 +199,8 @@ app.get('/hash/:input',function(req,res){
 });
 
 function hash (input,salt){
-   return ["pbkdf2Sync","10000",salt,crypto.pbkdf2Sync(input,salt,10000,512,'sha512').toString('hex')].join("$");
+    var hashed = crypto.pbkdf2Sync(input,salt,10000,512,'sha512');
+   return ["pbkdf2Sync","10000",salt,hashed.toString('hex')].join("$");
 }
 
 app.get('/articles/:articleName', function (req,res) {
