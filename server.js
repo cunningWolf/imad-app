@@ -209,8 +209,6 @@ app.post('/login',function(req,res){
                     res.status(403).send('username/password is invalid');
                 }
            }
-          
-           res.send('user successfully created'+username);
        } 
    });
 });
