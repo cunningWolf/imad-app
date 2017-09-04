@@ -160,6 +160,7 @@ app.get('/counter', function (req, res) {
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname,'ui','index.html'));
 });
+
 var names = [];
 app.get('/submit-name',function(req,res){
     //getting name from req
@@ -198,9 +199,7 @@ app.post('/login',function(req,res){
                 var hashedPassword = hash(password,salt);
                 if(hashedPassword === dbString){
                     req.session.auth = {userId: result.rows[0].id};
-                    //sesion setting a cookie with as session id
-                    //server side it maps the session id to an object
-                    //oject contains 
+                    //sesion setting a cookie with as session id//server side it maps the session id to an object//oject contains 
                     res.send('credentials are correct');
                 }
                 else{
@@ -212,7 +211,7 @@ app.post('/login',function(req,res){
 });
 
 app.get('/check-login',function(req,res){
-   if(req.session && req.session.auth && res.session.auth.userId){
+   if(req.session && req.session.auth && req.session.auth.userId){
        res.send('you are logged in: '+ req.session.auth.userId.toString());
    }
    else
@@ -223,8 +222,6 @@ app.get('/check-login',function(req,res){
 });
 
 app.post('/create-user',function(req,res){
-   
-   
    var username = req.body.username;
    var password = req.body.password;
    var salt = crypto.randomBytes(128).toString('hex');
