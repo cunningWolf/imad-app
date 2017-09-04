@@ -199,7 +199,7 @@ app.post('/login',function(req,res){
                 var salt = dbString.split('$')[2];
                 var hashedPassword = hash(password,salt);
                 if(hashedPassword === dbString){
-                    req.session.auth = {userId: result.rows[0].id};
+                    //req.session.auth = {userId: result.rows[0].id};
                     //sesion setting a cookie with as session id
                     //server side it maps the session id to an object
                     //oject contains 
