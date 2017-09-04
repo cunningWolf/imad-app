@@ -221,6 +221,11 @@ app.get('/check-login',function(req,res){
    
 });
 
+app.get('/logout',function(req,res){
+   delete req.session.auth;
+   res.send('Logged out!');
+});
+
 app.post('/create-user',function(req,res){
    var username = req.body.username;
    var password = req.body.password;
