@@ -210,7 +210,7 @@ app.post('/login',function(req,res){
                 }
            }
           
-           res.send('user successfully created'+username);
+           res.sendStatus('user successfully created'+username);
        } 
    });
 });
