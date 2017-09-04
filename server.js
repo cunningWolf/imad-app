@@ -192,7 +192,7 @@ app.post('/login',function(req,res){
        } 
        else{
            if( result.rows.length === 0){
-               res.sendStatus(403).send('username/password is invalid');
+               res.send(403).send('username/password is invalid');
            }
            else{
                 var dbString = result.rows[0].password;
@@ -210,7 +210,7 @@ app.post('/login',function(req,res){
                 }
            }
           
-           res.sendStatus('user successfully created'+username);
+           res.send('user successfully created'+username);
        } 
    });
 });
