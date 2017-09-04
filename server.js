@@ -3,10 +3,15 @@ var morgan = require('morgan');
 var path = require('path');
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
+app.use(session({
+    secret:'somerandomvalue',
+    cookie:{maxAgeOf: 1000*60*60*24*30}
+}));
 
 var articles = {
     'article-one':{
@@ -192,6 +197,10 @@ app.post('/login',function(req,res){
                 var salt = dbString.split('$')[2];
                 var hashedPassword = hash(password,salt);
                 if(hashedPassword === dbString){
+                    req.session.auth = {userId: result.rows[0].id};
+                    //sesion setting a cookie with as session id
+                    //server side it maps the session id to an object
+                    //oject contains 
                     res.send('credentials are correct');
                 }
                 else{
@@ -202,6 +211,17 @@ app.post('/login',function(req,res){
            res.send('user successfully created'+username);
        } 
    });
+});
+
+app.get('/check-login',function(req,res){
+   if(req.session && req.session.auth && res.session.auth.userId){
+       res.send('you are logged in: '+ req.session.auth.userId.toString());
+   }
+   else
+   {
+       res.send('you are not loggd in');
+   }
+   
 });
 
 app.post('/create-user',function(req,res){
