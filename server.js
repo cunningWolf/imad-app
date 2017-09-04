@@ -3,17 +3,15 @@ var morgan = require('morgan');
 var path = require('path');
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
-//var session = require('express-session');
+var session = require('express-session');
 
 var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
-// app.use(session({
-//     secret: 'somerandomvalue',
-//     cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},
-//     resave: true,
-//     saveUninitialized: true
-// }));
+app.use(session({
+    secret: 'somerandomvalue',
+    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30}
+}));
 
 var articles = {
     'article-one':{
@@ -199,7 +197,7 @@ app.post('/login',function(req,res){
                 var salt = dbString.split('$')[2];
                 var hashedPassword = hash(password,salt);
                 if(hashedPassword === dbString){
-                    //req.session.auth = {userId: result.rows[0].id};
+                    req.session.auth = {userId: result.rows[0].id};
                     //sesion setting a cookie with as session id
                     //server side it maps the session id to an object
                     //oject contains 
